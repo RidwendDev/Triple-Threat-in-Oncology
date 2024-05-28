@@ -21,7 +21,12 @@ Selanjutnya, melakukan konfigurasi awal, termasuk ukuran gambar, transformasi, d
 Dataset khusus dibangun untuk memuat data gambar dan label terkait. Hal ini melibatkan proses pembuatan kelas custom dataset yang mengatur cara data dimuat dan diproses, serta pembuatan dataLoader untuk memudahkan penggunaan data dalam proses pelatihan dan validasi.
 ## Modeling
 ### Arsitektur EfficientNetB0
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=12_1OTnFHoQd3bqi6fRS8fo4LFnXvQseI" alt="EffNetB0">
+</p>
+Jadi input layer disini berdimensi HxWxC -> 224 pixel x 224 pixel x 3 channel RGB, berikutnya akan diteruskan ke layer konvolusi pertama dengan ukuran kernel 3x3 stride 2 yang menjadikan tensor berukuruan 112x112x32, berikutnya masuk ke layer MBCONV1 dengan ukuran kernel 3x3 stride 1 menjadikan output tensor 112x112x16 dst dengan skema yang sama. Disini 
 
+Sedikit penjelasan tentang layer MBConv, jadi MBConv adalah `Mobile Inverted Bottleneck Convolution` dimana network dirancang untuk dapat dijalankan di resource yang terbatas karena parameter dan komputasi yang lebih efisien. Inverted Bottleneck disini menggunakan prinsip bottleneck seperti apa yang digunakan di arsitektur ResNet, dimana `ruang filter akan dikurangi sebelum ekspansi`. Inverted disini berari urutan operasinya setalah kita ekspansi dimensi kemudian melakukan pengurangan dimensi. 
 ### Arsitektur Hybrid CNN EncoderTransformer
 
 ### Arsitektur ConvNext
