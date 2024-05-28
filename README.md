@@ -1,4 +1,3 @@
-# Triple-Threat-in-Oncology
 ### Comparing EfficientNet, Hybrid CNN EncoderTransformer, and ConvNext in Skin Cancer Classification
 
 # LATAR BELAKANG
@@ -31,8 +30,13 @@ Jadi input layer disini berdimensi HxWxC -> 224 pixel x 224 pixel x 3 channel RG
 Sedikit penjelasan tentang layer MBConv, jadi MBConv adalah `Mobile Inverted Bottleneck Convolution` dimana network dirancang untuk dapat dijalankan di resource yang terbatas karena parameter dan komputasi yang lebih efisien. Inverted Bottleneck disini menggunakan prinsip bottleneck seperti apa yang digunakan di arsitektur ResNet, dimana `ruang filter akan dikurangi sebelum ekspansi`. Inverted disini berari urutan operasinya setalah kita ekspansi dimensi kemudian melakukan pengurangan dimensi. 
 
 ### Arsitektur Hybrid CNN EncoderTransformer
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=15TtHzd24nNr4xhOSwsph0v-cQnlSUbyl" alt="mbconv">
+</p>
+Arsitektur ini dibangun secara custom, dimulai dari memasukan input gambar 224x224x3 berikutnya input diubah(reshape) menjadi bentuk 1 dimensi. Lalu masuk kedalam layer convolutional berdimensi 1 untuk melakukan ekstraksi fitur lebih lanjut. Untuk mengurangi dimensi output dari layer convolutional 1 dimensi, peneliti menggunakan Adaptive Max Pooling berikutnya tensor diflatten menjadi bentuk 2 Dimensi agar dapat diproses oleh layer fully connected, berikutnya tensor di unsqueeze agar dapat diterima oleh layer transformer. Setelah selesai di proses oleh layer transformer kembalikan ukuran dengan skema squeeze agar dapat diproses oleh layer fully connected terakhir untuk case klasfikasi.
 
 ### Arsitektur ConvNext
+
 # HASIL & ANALISIS
 
 # KESIMPULAN
