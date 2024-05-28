@@ -1,4 +1,4 @@
-### Comparing EfficientNet, Hybrid CNN EncoderTransformer, and ConvNext in Skin Cancer Classification
+### Comparing EfficientNet, Hybrid CNN EncoderTransformer, and ConvNext in Skin Cancer Classification 🧩
 
 # LATAR BELAKANG
 Kanker kulit merupakan salah satu dari lima jenis kanker yang paling banyak kasusnya di seluruh dunia (World Health Organization, 2022). Deteksi dini kanker kulit sangat penting untuk meningkatkan peluang kesembuhan dan mengurangi risiko komplikasi lebih lanjut. Namun, diagnosis kanker kulit secara manual oleh dokter ahli dapat menjadi proses yang menantang dan memakan waktu. Dengan kemajuan teknologi AI dalam beberapa tahun terakhir, pendekatan berbasis Convolutional Neural Network (CNN) telah menjadi metode yang populer untuk klasifikasi dan deteksi kanker kulit dari gambar (Esteva et al., 2017). Namun, model CNN tradisional memiliki beberapa keterbatasan, seperti sulitnya menangkap informasi kontekstual dan hubungan spasial yang kompleks dalam suatu gambar. Untuk menghadapi masalah ini, disini peneliti mencoba membandingkan kinerja pendekatan klasifikasi kanker kulit dengan model-model SOTA seperti EfficientNet, Hybrid CNN EncoderTransformer, dan ConvNext.
@@ -31,9 +31,23 @@ Sedikit penjelasan tentang layer MBConv, jadi MBConv adalah `Mobile Inverted Bot
 
 ### Arsitektur Hybrid CNN EncoderTransformer
 <p align="center">
-  <img src="https://drive.google.com/uc?export=view&id=15TtHzd24nNr4xhOSwsph0v-cQnlSUbyl" alt="mbconv">
+  <img src="https://drive.google.com/uc?export=view&id=1EjdHF6RMhzWroYfrRtqo_3y7erIUpJXf" alt="mbconv">
 </p>
-Arsitektur ini dibangun secara custom, dimulai dari memasukan input gambar 224x224x3 berikutnya input diubah(reshape) menjadi bentuk 1 dimensi. Lalu masuk kedalam layer convolutional berdimensi 1 untuk melakukan ekstraksi fitur lebih lanjut. Untuk mengurangi dimensi output dari layer convolutional 1 dimensi, peneliti menggunakan Adaptive Max Pooling berikutnya tensor diflatten menjadi bentuk 2 Dimensi agar dapat diproses oleh layer fully connected, berikutnya tensor di unsqueeze agar dapat diterima oleh layer transformer. Setelah selesai di proses oleh layer transformer kembalikan ukuran dengan skema squeeze agar dapat diproses oleh layer fully connected terakhir untuk case klasfikasi.
+Arsitektur ini dibangun secara custom, dimulai dari memasukan input gambar 224x224x3 berikutnya input diubah(reshape) menjadi bentuk 1 dimensi. Lalu masuk kedalam layer convolutional berdimensi 1 untuk melakukan ekstraksi fitur lebih lanjut. Untuk mengurangi dimensi output dari layer convolutional 1 dimensi, peneliti menggunakan Adaptive Max Pooling berikutnya tensor diflatten menjadi bentuk 2 Dimensi agar dapat diproses oleh layer fully connected, berikutnya tensor di unsqueeze agar dapat diterima oleh layer transformer. Setelah selesai di proses oleh layer transformer kembalikan ukuran dengan skema squeeze agar dapat diproses oleh layer fully connected terakhir untuk case klasfikasi. 
+Detail per layer:<br>
+
+```
+input (batch_size,3,224,224)
+reshape(batch_size,3,224x224)
+CNN Block(batch_size, cnn_out_channels, 224x224)
+Pooling (batch_size,cnn_out_channels,1)
+Flattening(batch_size, cnn_out_channels)
+Fully Connected(batch_size,transformer_hidden_dim)
+Unsqueeze(batch_size,1,transformer_hidden_dim)
+Transformer Encoder(batch_size,1,transformer_hidden_dim)
+Squeeze(batch_size,transformer_hidden_dim)
+Output Classifier(batch_size, output_dim)
+```
 
 ### Arsitektur ConvNext
 
