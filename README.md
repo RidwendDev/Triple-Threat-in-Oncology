@@ -13,7 +13,18 @@ Kanker kulit merupakan salah satu dari lima jenis kanker yang paling banyak kasu
 - Penelitian ini hanya memfokuskan pada proses klasifikasi gambar dermatoskopi untuk mengidentifikasi jenis-jenis kanker kulit, belum masuk di tahap lanjutan seperti deteksi dan segmentasi objek
 - Tidak ada analisis tambahan terkait interpretabilitas model atau studi kasus spesifik secara klinis.
 # METODE PENELITIAN
+## Data Loading
+Memuat dataset MNIST HAM10000 ke dalam environment. Dengan melibatkan pembacaan dataset dalam format yang sesuai serta menggabungkan directory pada image 1 dan 2 guna mempersiapkan data untuk pengolahan selanjutnya.
+## Konfigurasi dan Inisialisasi
+Selanjutnya, melakukan konfigurasi awal, termasuk ukuran gambar, transformasi, dan metode augmentasi yang akan diterapkan. Inisialisasi ini dilakukan untuk mempersiapkan data gambar yang telah ditransformasi sebelum dimasukkan ke dalam model.
+## Pembuatan Custom Dataset & Dataloader
+Dataset khusus dibangun untuk memuat data gambar dan label terkait. Hal ini melibatkan proses pembuatan kelas custom dataset yang mengatur cara data dimuat dan diproses, serta pembuatan dataLoader untuk memudahkan penggunaan data dalam proses pelatihan dan validasi.
+## Modeling
+### Arsitektur EfficientNetB0
 
+### Arsitektur Hybrid CNN EncoderTransformer
+
+### Arsitektur ConvNext
 # HASIL & ANALISIS
 
 # KESIMPULAN
