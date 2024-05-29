@@ -50,6 +50,9 @@ Output Classifier(batch_size, output_dim)
 ```
 
 ### Arsitektur ConvNext
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1-DmrmIx9B2z53X1GJsh8PFqF7Mb3JCHf" alt="mbconv">
+</p>
 
 # HASIL & ANALISIS
 
