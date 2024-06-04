@@ -27,7 +27,7 @@ Jadi input layer disini berdimensi HxWxC -> 224 pixel x 224 pixel x 3 channel RG
 <p align="center">
   <img src="https://drive.google.com/uc?export=view&id=1YcJlsJPsMCm2aKQE-vkm1FV6Lk3TT5ie" alt="mbconv">
 </p>
-Sedikit penjelasan tentang layer MBConv, jadi MBConv adalah `Mobile Inverted Bottleneck Convolution` dimana network dirancang untuk dapat dijalankan di resource yang terbatas karena parameter dan komputasi yang lebih efisien. Inverted Bottleneck disini menggunakan prinsip bottleneck seperti apa yang digunakan di arsitektur ResNet, dimana `ruang filter akan dikurangi sebelum ekspansi`. Inverted disini berari urutan operasinya setalah kita ekspansi dimensi kemudian melakukan pengurangan dimensi. 
+Sedikit penjelasan tentang layer MBConv, jadi MBConv adalah `Mobile Inverted Bottleneck Convolution` dimana network dirancang untuk dapat dijalankan di resource yang terbatas karena parameter dan komputasi yang lebih efisien. Inverted Bottleneck disini menggunakan prinsip bottleneck seperti apa yang digunakan di arsitektur ResNet, dimana `ruang filter akan dikurangi sebelum ekspansi`. Inverted disini berari urutan operasinya setalah kita ekspansi dimensi kemudian melakukan pengurangan dimensi. [1]
 
 ### Arsitektur Hybrid CNN EncoderTransformer
 <p align="center">
@@ -59,7 +59,7 @@ Untuk penjelasan arsitektur yang ada didalam ConvNext block, seperti berikut. <b
   <img src="https://drive.google.com/uc?export=view&id=1ScRATbX5_XwVjqMGtCj0lm1RrOY3HCNc" alt="mbconv">
 </p>
 <p align="center">
-  []
+  [2]
 </p>
 Input tensor akan masuk kedalam Depthwise Conv2D ebrikutnya diproses melewati Layer Norm, tensor yang telah dinormalisasi akan diteruskan ke Pointwise Conv2D, berikutnya Tensor akan diberikan fungsi aktivasi GELU, dan diteruskan lagi ke Pointwise Conv2D kedua. Tensor akan diubah lagi dimensinya lalu diskalasi dengan Scale Layer yang diteruskan ke drop path untuk melakukan regularization, terkahir tensor akan ditambahkan dengan input asli dengan skema skip connection, hasil inilah yang nantinya akan diteruskan menjadi output dari ConvNext Block.
 
@@ -103,4 +103,5 @@ Dari hasil classification report tsb, model dari ConvNext meraih performa paling
 Dari hasil waktu training tsb, peneliti menemukan model ConvNeXt tidak hanya memberikan akurasi yang lebih tinggi tetapi juga memiliki kecepatan iterasi yang jauh lebih baik dibandingkan dengan EfficientNetB0 dan Hybrid CNN+Transformers. Kecepatan iterasi ConvNeXt sebesar 2.13 iteration/s menunjukkan efisiensi dalam proses training model. Kesimpulannya, ConvNeXt merupakan model yang paling efektif dalam problem ini, mengingat performa akurasinya yang tinggi serta waktu training yang cepat.
 
 # REFERENCES
-
+[1] M. Sandler, A. Howard, M. Zhu, A. Zhmoginov and L. -C. Chen, "MobileNetV2: Inverted Residuals and Linear Bottlenecks," 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition, Salt Lake City, UT, USA, 2018, pp. 4510-4520, doi: 10.1109/CVPR.2018.00474.<br>
+[2] Chen, Shenglong & Ogawa, Yoshiki & Sekimoto, Yoshihide. (2023). Large-scale individual building extraction from open-source satellite imagery via super-resolution-based instance segmentation approach. ISPRS Journal of Photogrammetry and Remote Sensing.
